@@ -1,0 +1,1 @@
+http-server -S -K key-20170225-122552.pem -C cert-20170225-122552.crt -o -c-1

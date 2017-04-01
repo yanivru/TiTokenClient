@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Getting Started Extension's Popup</title>
+    <style>
+      body {
+        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-size:30px;
+		
+      }
+      #status {
+        /* avoid an excessively wide status text */
+        white-space: pre;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        max-width: 400px;
+      }
+	  
+	.login-form {
+		background: #333;
+		width: 600px;
+		height:300px;
+		margin: 120px auto;
+		padding-top:30px;
+		border-radius: 3px;
+	}
+	  
+	.login-form button {
+	  border: none;
+	  display: block;
+	  width: 190px;
+	  height: 100px;
+	  margin-left: 200px;
+	  margin-top:20px;
+	  float: left;
+	  border-radius: 3px;
+	  background: linear-gradient(#70787e, #4b545b);
+	  text-transform: uppercase;
+	  font-family: Helvetica, Neue;
+	  font-size: 13px;
+	  font-weight: bold;
+	  cursor: pointer;
+	  color: #11161a;
+	  text-shadow: 0 1px 0 #727980;
+	  box-shadow: 0 3px 3px #222, inset 0 1px 0 #a8a8a8;
+	}
+
+	.login-form button:hover {
+	  background: linear-gradient(#70787e, #545a5e);
+	}
+
+	.login-form button:active {
+	  background: linear-gradient(#545c61, #545a5e);
+	}
+	p{
+		text-align:center;
+		
+		color:white;
+	}
+    </style>
+
+    <script src=".\main1.js"></script>
+  </head>
+  <body>
+	<div class="login-form">
+	<p>Welcome. Please login</p>
+	<button onclick="login()">Login via TI Token</button>
+	<div/>
+  </body>
+</html>
+

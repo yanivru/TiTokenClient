@@ -5,7 +5,6 @@ var userName;
 
 function login() {
 	passwordIndex++;
-	window.alert(passwordIndex);
 	passwordService = null;
 	
 	connectAndGetService()

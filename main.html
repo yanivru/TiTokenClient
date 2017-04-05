@@ -13,9 +13,9 @@
         white-space: pre;
         text-overflow: ellipsis;
         overflow: hidden;
-        max-width: 400px;
+        max-width: 800px;
       }
-	  
+		
 	.login-form {
 		background: #333;
 		width: 600px;
@@ -62,10 +62,12 @@
     <script src=".\main1.js"></script>
   </head>
   <body>
+	<div id="status" class="status-line">Connected. Pending user approval...</div>
 	<div class="login-form">
-	<p>Welcome. Please login</p>
-	<button onclick="login()">Login via TI Token</button>
+		<p>Welcome. Please login</p>
+		<button onclick="login()">Login via TI Token</button>
 	<div/>
+	
   </body>
 </html>
 

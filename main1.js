@@ -9,10 +9,11 @@ function login() {
 	
 	connectAndGetService()
 		.then(() => {
-			return registerUserNameNotifications()
+			return registerUserNameNotifications();
 		})
 		.then(() => {
-			registerPasswordNotification()
+			document.getElementById("status").innerHTML = "Connected. Pending user approval...";
+			return registerPasswordNotification();
 		})
 		.catch(error => { window.alert(error); });
 }
@@ -69,5 +70,5 @@ function registerPasswordNotification() {
 function onPassword(event) {
 	var value = event.target.value;	
 	var password = String.fromCharCode.apply(null, new Uint8Array(value.buffer));
-	window.alert('User name: ' + userName + ' password: ' + password);	
+	document.getElementById("status").innerHTML = 'User name: ' + userName + ' password: ' + password;
 }

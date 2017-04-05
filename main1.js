@@ -9,8 +9,11 @@ function login() {
 	
 	connectAndGetService()
 		.then(() => {
-			return registerUserNameNotifications();
+			return registerUserNameNotifications()
 		})
+		.then(() => {
+			registerPasswordNotification()
+		});
 		.catch(error => { window.alert(error); });
 }
 
@@ -41,8 +44,7 @@ function onUserName(event) {
 	var value = event.target.value;
 	userName = String.fromCharCode.apply(null, new Uint8Array(value.buffer));
 	
-	writePasswordID()
-		.then(() => registerPasswordNotification());
+	writePasswordID();
 }
 
 function writePasswordID() {

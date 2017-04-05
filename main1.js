@@ -1,24 +1,16 @@
 var passwordIndex = 0;
 
 var passwordService;
+var userName;
 
 function login() {
 	passwordIndex++;
+	window.alert(passwordIndex);
 	passwordService = null;
 	
 	connectAndGetService()
 		.then(() => {
-			return readUserName();
-		})
-		.then((userName) => {
-			return writePasswordID()
-				.then(() => {return userName;});
-		})
-		.then((userName) => {
-			return readPassword()
-				.then((password) => {
-					window.alert('User name: ' + userName + ' password: ' + password);
-				});
+			return registerUserNameNotifications();
 		})
 		.catch(error => { window.alert(error); });
 }
@@ -37,13 +29,21 @@ function connectAndGetService() {
 	});
 }
 
-function readUserName() {
-	   return passwordService.getCharacteristic('cf6b3b42-17fe-481a-8328-62891fb8aefd')
-		 .then(characteristic => {return characteristic.readValue();})
-		 .then(value => {
-			 var userName = String.fromCharCode.apply(null, new Uint8Array(value.buffer));
-			 return userName;
-		 });
+function registerUserNameNotifications() {
+	   return passwordService.getCharacteristic('cf6b0e6f-17fe-481a-8328-62891fb8aefd')
+		 .then(characteristic => {		 
+			 return characteristic.startNotifications().then(() => {
+				characteristic.addEventListener('characteristicvaluechanged', onUserName);
+			 })
+		});
+}
+
+function onUserName(event) {
+	var value = event.target.value;
+	userName = String.fromCharCode.apply(null, new Uint8Array(value.buffer));
+	
+	writePasswordID()
+		.then(() => registerPasswordNotification());
 }
 
 function writePasswordID() {
@@ -56,11 +56,17 @@ function writePasswordID() {
 		});
 }
 
-function readPassword() {
+function registerPasswordNotification() {
 	   return passwordService.getCharacteristic('cf6b44ac-17fe-481a-8328-62891fb8aefd')
-		 .then(characteristic => {return characteristic.readValue();})
-		 .then(value => {
-			 var password = String.fromCharCode.apply(null, new Uint8Array(value.buffer));
-			 return password;
-		 });	
+		 .then(characteristic => {
+			return characteristic.startNotifications().then(() => {
+				characteristic.addEventListener('characteristicvaluechanged', onPassword);
+			})
+		})
+}
+
+function onPassword(event) {
+	var value = event.target.value;	
+	var password = String.fromCharCode.apply(null, new Uint8Array(value.buffer));
+	window.alert('User name: ' + userName + ' password: ' + password);	
 }

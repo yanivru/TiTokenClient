@@ -13,7 +13,7 @@ function login() {
 		})
 		.then(() => {
 			registerPasswordNotification()
-		});
+		})
 		.catch(error => { window.alert(error); });
 }
 
